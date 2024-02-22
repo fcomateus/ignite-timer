@@ -34,18 +34,21 @@ export function Home() {
     },
   })
 
-  const { handleSubmit, watch, /*reset*/ } = newCycleForm
+  const { handleSubmit, watch, reset } = newCycleForm
 
   type NewCicleFormData = zod.infer<typeof newCycleFormValidationSchema>
 
-  
+  function handleCreateNewCycle(data: NewCicleFormData) {
+    createNewCycle(data)
+    reset()
+  }
 
   const task = watch('task')
   const isSubmitDisabled = !task
 
   return (
     <HomeContainer>
-      <form action="" onSubmit={handleSubmit(createNewCycle)}>
+      <form action="" onSubmit={handleSubmit(handleCreateNewCycle)}>
 
         <FormProvider {...newCycleForm}>
           <NewCycleForm />
